@@ -1,6 +1,10 @@
 const addClass = (elem, value) => elem.classList.add(value);
 const addClasses = (elem, classes) => elem.classList.add(...classes);
-const addChild = (elem, child) => elem.appendChild(child);
+const addChild = (elem, child) => {
+  if (child === undefined || child === null) return;
+  if (typeof child === 'string') return elem.appendChild(document.createTextNode(child));
+  return elem.appendChild(child);
+};
 const addChildren = (elem, children) => children.forEach((item) => addChild(elem, item));
 const addTextContent = (elem, text) => (elem.textContent = text);
 const onClick = (elem, evt) => elem.addEventListener('click', evt);
